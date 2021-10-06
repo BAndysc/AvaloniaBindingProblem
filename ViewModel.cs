@@ -1,8 +1,7 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 
-namespace AvaloniaBindingProblem
+namespace TestBindings
 {
     public class ViewModel : INotifyPropertyChanged
     {
@@ -24,8 +23,7 @@ namespace AvaloniaBindingProblem
                 OnPropertyChanged();
             }
         }
-        
-        [NotifyPropertyChangedInvocator]
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

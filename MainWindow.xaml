@@ -1,0 +1,34 @@
+﻿<Window x:Class="TestBindings.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestBindings"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="local:Custom.CustomProperty" Value="{Binding Text, Mode=TwoWay}" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBox Text="{Binding Text}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Border  DataContext="{Binding Item}">
+            <ListBoxItem Content="{Binding}" />
+        </Border>
+        <ListBox Grid.Column="1" ItemsSource="{Binding Items}" />
+        <Button Grid.Column="2" Click="Button_Click">Check</Button>
+    </Grid>
+</Window>

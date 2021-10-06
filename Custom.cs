@@ -1,19 +1,21 @@
-using Avalonia;
+﻿using System.Windows;
 
-namespace AvaloniaBindingProblem
+namespace TestBindings
 {
-    public class Custom
+    class Custom
     {
-        public static readonly AttachedProperty<string> CustomPropertyProperty = AvaloniaProperty.RegisterAttached<IAvaloniaObject, string>("CustomProperty", typeof(Custom), "default value");
-
-        public static string GetCustomProperty(IAvaloniaObject obj)
+        public static readonly DependencyProperty CustomPropertyProperty = DependencyProperty.RegisterAttached(
+          "CustomProperty",
+          typeof(string),
+          typeof(Custom)
+        );
+        public static void SetCustomProperty(UIElement element, string value)
         {
-            return obj.GetValue(CustomPropertyProperty);
+            element.SetValue(CustomPropertyProperty, value);
         }
-
-        public static void SetCustomProperty(IAvaloniaObject obj, string value)
+        public static string GetCustomProperty(UIElement element)
         {
-            obj.SetValue(CustomPropertyProperty, value);
+            return (string)element.GetValue(CustomPropertyProperty);
         }
     }
 }
